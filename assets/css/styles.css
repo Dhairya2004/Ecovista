@@ -30,7 +30,7 @@ a {
 }
 
 .nav-item {
-  width: 1000px;
+  width: auto;
   display: flex;
   margin-top: 2px;
 }

@@ -16,6 +16,8 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 const db = getFirestore();
 
+const profilePicture = document.getElementById('profile-picture');
+
 const signInButton = document.getElementById("signInButton");
 
 const userSignIn = async () => {
@@ -45,6 +47,7 @@ const userSignIn = async () => {
 const userSignOut = async () => {
     signOut(auth).then(() => {
         showContainer();
+        profilePicture.src = "assets/img/profile.png";
     }).catch((error) => { });
 };
 
@@ -109,10 +112,18 @@ const fetchUserinfo = async () => {
     if (user) {
         const displayName = user.displayName;
         const photoURL = user.photoURL;
-        // Get a reference to the 'img' element
-        const profilePicture = document.getElementById('profile-picture');
+
 
         // Set the 'src' attribute to the 'photoURL'
         profilePicture.src = photoURL;
     }
 };
+
+const profileContainer = document.querySelector(".profile-container");
+
+function showSignOut() {
+    const signOutDiv = document.getElementById("signOutButton");
+    signOutDiv.classList.toggle("show");
+}
+
+profileContainer.addEventListener('click', showSignOut);

@@ -73,10 +73,6 @@
             position: absolute;
         }
 
-        #signOutButton {
-            display: none;
-        }
-
         #signInButton {
             display: flex;
             justify-content: center;
@@ -94,10 +90,10 @@
             width: auto;
             height: 25px;
             background-color: #00311f;
-            border-radius: 10px;
+            border-radius: 60px;
             border: 2px solid #00311f;
             padding: 10px 15px;
-            margin: 0 20px;
+            margin: 0 40px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -115,6 +111,25 @@
 
         #coinBalance {
             margin-right: 5px;
+        }
+
+        .signOutButton {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: -15px;
+            background-color: lightgray;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 3px 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+
+        }
+
+        .signOutButton.show {
+            display: block;
+            opacity: 1;
         }
     </style>
 </head>
@@ -144,10 +159,13 @@
                     <p>Coins</p>
                 </span>
             </div>
-            <img id="profile-picture" src="assets/img/profile.png" alt="Cropped Image"
-                style="width: 44px; height: 44px; object-fit: cover; border-radius: 50%; border: 3px solid #00311f; margin: 0px;">
+            <div class="profile-container">
+                <img id="profile-picture" src="assets/img/profile.png" alt="Cropped Image"
+                    style="width: 44px; height: 44px; object-fit: cover; border-radius: 50%; border: 3px solid #00311f; margin: 0px;">
+            </div>
+            <div id="signOutButton" class="signOutButton">SignOut</div>
         </div>
-        <div id="signOutButton"></div>
+
 
     </div>
 

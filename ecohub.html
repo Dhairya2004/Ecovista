@@ -46,6 +46,34 @@
             top: 3px;
             margin: 0 5px;
         }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            display: none;
+        }
+
+        .login-wrapper {
+            width: 380px;
+            background-color: white;
+            margin-top: 50px;
+            border: 3px solid #121212;
+            border-radius: 20px;
+            box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+            opacity: 100%;
+        }
+
+        .blur-content {
+            display: none;
+            filter: blur(10px);
+            position: absolute;
+        }
+
+        .signOutButton {
+            background-color: white;
+        }
     </style>
 </head>
 
@@ -55,45 +83,18 @@
             <img src="assets\img\logo.png" width="80px">
         </div>
         <div class="nav-item">
-            <div class="item active">Home</div>
-            <div class="item">EcoHub</div>
+            <div class="item"><a href="index.html">Home</a></div>
+            <div class="item active">EcoHub</div>
             <a href="insights.html">
                 <div class="item">Insights</div>
             </a>
             <div class="item">Impact</div>
+            <button id="signOutButton">Sign-out</button>
         </div>
     </div>
-    <div class="blur-content" style="filter: blur(10px); position: absolute;">Lorem ipsum dolor sit amet consectetur
-        adipisicing elit.
-        Corporis, perferendis dolore minus magnam iusto ducimus quibusdam magni voluptatum porro cum fugiat! Repellendus
-        ad saepe rerum animi placeat fugiat! Obcaecati, unde?
-        Laboriosam hic quod velit nihil doloribus odio libero? Error minus nobis, sit nesciunt, voluptate provident
-        libero iure at possimus velit fugiat, doloremque iste odio placeat dicta a dolorem reiciendis delectus?
-        Deserunt aspernatur suscipit ducimus reiciendis debitis hic eaque ipsam nostrum impedit deleniti, recusandae
-        maxime incidunt vel tempora. Libero sint illum temporibus quidem voluptates dolore quisquam rerum, ullam vero
-        aliquam a.
-        Dicta nobis assumenda nisi ipsum consequuntur in quos illum, vitae aspernatur porro ad fugit explicabo sequi
-        cumque a sapiente ex laudantium quisquam beatae modi asperiores et error repellendus doloremque? Perferendis!
-        Accusamus sint corporis officiis ea nobis nisi, nam perspiciatis at consectetur cum laborum sequi mollitia!
-        Possimus, quos nobis adipisci magnam, veniam odit labore ea quasi harum pariatur, voluptatum dolor qui.
-        Accusantium corporis sint recusandae quam pariatur ipsum ea tempore quos, atque fugiat quis perspiciatis, vel
-        aspernatur enim, id corrupti sit non vero deserunt dignissimos dolores nobis deleniti? Quos, vitae vero.
-        Est totam, saepe doloremque provident hic voluptas aliquam pariatur excepturi quod soluta dolores, ipsam sint
-        iusto. Necessitatibus aut maxime repellendus quis nesciunt beatae quas delectus sequi perspiciatis odio, dolores
-        labore?
-        Consectetur earum odit enim omnis tempore maiores blanditiis nisi repellat ratione reprehenderit. Vero
-        praesentium, maxime laboriosam minima, iusto quos, unde eum exercitationem dolorem vel error iste? Quo debitis
-        modi assumenda!
-        Quos itaque necessitatibus accusamus velit asperiores quis repellendus culpa ducimus vel quasi quibusdam maiores
-        temporibus porro distinctio ratione autem modi corporis, cupiditate possimus veritatis consequatur eum nulla
-        similique placeat. Inventore.
-        Assumenda praesentium cum placeat blanditiis libero excepturi unde modi. Sequi culpa voluptatem vero, voluptate
-        asperiores reprehenderit, laboriosam in reiciendis aliquam ex eos perspiciatis modi optio est repellendus quia,
-        eveniet atque.</div>
-    <div class="container"
-        style="width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center;">
-        <div class="login-wrapper"
-            style="width: 380px; background-color: white; margin-top: 50px; border: 3px solid #121212; border-radius: 20px; box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px; opacity: 100%;">
+    <div class="blur-content"></div>
+    <div class="container">
+        <div class="login-wrapper">
             <div class="login-title">
                 Login Required
             </div>
@@ -106,7 +107,7 @@
                     <br>
                 </div>
                 <div class="field" style="display: flex; justify-content: center; align-items: center;">
-                    <button class="btn-sign">
+                    <button id="signInButton" class="btn-sign">
                         <span>
                             <img class="google-icon"
                                 src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
@@ -117,6 +118,8 @@
             </form>
         </div>
     </div>
+
+    <script type="module" src="assets/js/auth.js"></script>
 </body>
 
 </html>

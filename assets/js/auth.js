@@ -23,6 +23,7 @@ const userSignIn = async () => {
         .then(async (result) => {
             hideContainer();
             addCoins(0);
+            fetchUserinfo();
             const user = result.user;
             console.log(user);
 
@@ -51,6 +52,7 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         hideContainer();
         addCoins(0);
+        fetchUserinfo();
         // Load and display the user's coin balance
         const userDocRef = doc(db, "users", user.uid);
     }
@@ -101,3 +103,16 @@ function showContainer() {
 
 signInButton.addEventListener('click', userSignIn);
 signOutButton.addEventListener('click', userSignOut);
+
+const fetchUserinfo = async () => {
+    const user = auth.currentUser;
+    if (user) {
+        const displayName = user.displayName;
+        const photoURL = user.photoURL;
+        // Get a reference to the 'img' element
+        const profilePicture = document.getElementById('profile-picture');
+
+        // Set the 'src' attribute to the 'photoURL'
+        profilePicture.src = photoURL;
+    }
+};

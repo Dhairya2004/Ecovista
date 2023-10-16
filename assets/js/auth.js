@@ -41,6 +41,12 @@ const userSignIn = async () => {
         });
 };
 
+const userSignOut = async () => {
+    signOut(auth).then(() => {
+        showContainer();
+    }).catch((error) => { });
+};
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
         hideContainer();
@@ -56,17 +62,23 @@ onAuthStateChanged(auth, (user) => {
 // Get the container element
 const container = document.querySelector('.container');
 const blurcontent = document.querySelector('.blur-content');
+const signOutButton = document.getElementById("signOutButton");
+
+
 
 // Function to hide the container
 function hideContainer() {
     container.style.display = 'none';
     blurcontent.style.display = 'none';
+    signOutButton.style.display = 'block';
 }
 // Function to show the container
 function showContainer() {
     blurcontent.style.display = 'block';
     container.style.display = 'flex';
+    signOutButton.style.display = 'none';
 }
 
 
 signInButton.addEventListener('click', userSignIn);
+signOutButton.addEventListener('click', userSignOut);

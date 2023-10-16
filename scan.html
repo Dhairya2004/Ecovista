@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>QR Code Scanner</title>
@@ -8,17 +9,21 @@
             width: 100%;
             height: 100%;
         }
+
         #qr-canvas {
             display: none;
         }
+
         .scan {
             width: 100%;
             max-width: 600px;
             margin: auto;
             position: relative;
             overflow: hidden;
-            display: none; /* Initially hide the scanner */
+            display: none;
+            /* Initially hide the scanner */
         }
+
         .scan::before {
             content: "";
             position: absolute;
@@ -29,81 +34,39 @@
             background-color: rgba(255, 255, 255, 0.5);
             animation: scan 2s infinite linear;
         }
+
         @keyframes scan {
             from {
                 top: -100%;
             }
+
             to {
                 top: 100%;
             }
         }
+
         .illustration {
             width: 100%;
             max-width: 600px;
             margin: auto;
         }
+
         .center-content {
             text-align: center;
         }
-        .btn {
-            border: 2px solid gray;
-            color: gray;
-            background-color: white;
-            padding: 8px 20px;
-            border-radius: 8px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        #fileInput {
-            display: none;
-        }
-        .upload-btn-wrapper {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-        }
-        .upload-btn-wrapper input[type=file] {
-            font-size: 100px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            cursor: pointer;
-        }
-        .uploaded-image {
-            width: 100%;
-            max-width: 600px;
-            margin: auto;
-            animation: fadeInOut 2s infinite; /* Fade in and out animation */
-        }
-        @keyframes fadeInOut {
-            0%, 100% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
     </style>
 </head>
+
 <body>
     <div class="center-content">
-        <button class="btn" onclick="startScanning()">Scan Me</button>
-        <div class="upload-btn-wrapper">
-            <button class="btn" onclick="document.getElementById('fileInput').click()">Upload Image</button>
-            <input type="file" id="fileInput" accept="image/*" onchange="handleFile()" style="cursor: pointer;">
-        </div>
         <div class="illustration">
-            <img src="https://storage.googleapis.com/support-kms-prod/mQmcrC93Ryi2U4x5UdZNeyHQMybbyk71yCVm" alt="Illustration">
+            <img src="https://storage.googleapis.com/support-kms-prod/mQmcrC93Ryi2U4x5UdZNeyHQMybbyk71yCVm"
+                alt="Illustration">
+            <button onclick="startScanning()">Scan Here</button>
         </div>
         <div class="scan">
             <video id="qr-video" alt="QR Code Scanner"></video>
-            <p id="loadingMessage">Click 'Scan Me' to start scanning.</p>
-        </div>
-        <div class="uploaded-image" id="uploadedImageContainer">
-            <img id="previewImage" alt="Uploaded Image Preview">
-            <p id="loadingMessageUpload">Scanning image...</p>
+            <p id="loadingMessage">Click 'Scan Now' to start scanning.</p>
         </div>
     </div>
 
@@ -117,65 +80,38 @@
         var loadingMessage = document.getElementById("loadingMessage");
         var illustrationContainer = document.querySelector('.illustration');
         var scanContainer = document.querySelector('.scan');
-        var fileInput = document.getElementById('fileInput');
-        var previewImage = document.getElementById('previewImage');
-        var uploadedImageContainer = document.getElementById('uploadedImageContainer');
-        var loadingMessageUpload = document.getElementById('loadingMessageUpload');
 
         function startScanning() {
             illustrationContainer.style.display = 'none'; // Hide the illustration
             scanContainer.style.display = 'block'; // Show the scanner
-            fileInput.value = ''; // Reset file input value
-            uploadedImageContainer.style.display = 'none'; // Hide uploaded image container
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function(stream) {
+
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function (stream) {
                 video.srcObject = stream;
                 video.setAttribute("playsinline", true);
                 video.play();
-                var scanDuration = Math.floor(Math.random() * (5000 - 3000 + 1)) + 3000; // Random duration between 3 to 5 seconds
-                setTimeout(function() {
-                    video.pause();
-                    loadingMessage.innerText = "📷 Scanning complete!";
-                    displayRandomNumber();
-                    setTimeout(resetScanning, 2000); // Reset scanning after 2 seconds
-                }, scanDuration);
-                requestAnimationFrame(tick);
-                loadingMessage.innerText = "📷 Scanning...";
-            }).catch(function(error) {
+
+                // Check if video stream has started before proceeding
+                video.onloadedmetadata = function () {
+                    var scanDuration = Math.floor(Math.random() * (5000 - 3000 + 1)) + 3000; // Random duration between 3 to 5 seconds
+                    setTimeout(function () {
+                        video.pause();
+                        loadingMessage.innerText = "📷 Scanning complete!";
+                        displayRandomNumber();
+                    }, scanDuration);
+                    requestAnimationFrame(tick);
+                    loadingMessage.innerText = "📷 Scanning...";
+                };
+
+                // Listen for the end of the video stream
+                video.onended = function () {
+                    resetScanning();
+                };
+            }).catch(function (error) {
                 console.error("Error accessing camera:", error);
                 loadingMessage.innerText = "❌ Unable to access camera. Please check your settings.";
             });
         }
 
-        function handleFile() {
-            const file = fileInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImage.src = e.target.result;
-                    fitImageWithinDimensions();
-                    uploadedImageContainer.style.display = 'block'; // Show uploaded image container
-                    illustrationContainer.style.display = 'none'; // Hide the illustration
-                    scanContainer.style.display = 'block'; // Show the scanner
-                    loadingMessageUpload.innerText = "📷 Scanning image...";
-                    setTimeout(function() {
-                        loadingMessageUpload.innerText = "Image scanned successfully!";
-                        displayRandomNumber();
-                        setTimeout(resetScanning, 2000); // Reset scanning after 2 seconds
-                    }, 3000); // Simulate scanning time for the image
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function fitImageWithinDimensions() {
-            var maxWidth = scanContainer.clientWidth;
-            var maxHeight = scanContainer.clientHeight;
-            var widthRatio = maxWidth / previewImage.width;
-            var heightRatio = maxHeight / previewImage.height;
-            var minRatio = Math.min(widthRatio, heightRatio);
-            previewImage.width = previewImage.width * minRatio;
-            previewImage.height = previewImage.height * minRatio;
-        }
 
         function tick() {
             if (video.readyState === video.HAVE_ENOUGH_DATA) {
@@ -192,27 +128,32 @@
             }
             requestAnimationFrame(tick);
         }
-        qrcode.callback = function(result) {
+
+        qrcode.callback = function (result) {
             alert("Scanned QR Code: " + result);
         };
+
         function displayRandomNumber() {
-            var randomNumber = Math.floor(Math.random() * (12 - 10 + 1)) + 10; // Random number between 10 and 12
+            var randomNumber = Math.floor(Math.random() * (13 - 10 + 1)) + 10; // Random number between 10 and 12
             alert("Random Number: " + randomNumber);
+
+            // Stop the video stream
+            var tracks = video.srcObject.getTracks();
+            tracks.forEach(track => track.stop());
+
             scanContainer.style.display = 'none'; // Hide the scanner
             illustrationContainer.style.display = 'block'; // Show the illustration
         }
+
 
         function resetScanning() {
             scanContainer.style.display = 'none'; // Hide the scanner
             illustrationContainer.style.display = 'block'; // Show the illustration
-            loadingMessage.innerText = "Click 'Scan Me' to start scanning.";
+            loadingMessage.innerText = "Click 'Scan Now' to start scanning.";
             video.currentTime = 0;
-
-            uploadedImageContainer.style.display = 'none'; // Hide uploaded image container
-            previewImage.src = ''; // Reset uploaded image preview
-            loadingMessageUpload.innerText = ''; // Reset upload message
         }
     </script>
 
 </body>
+
 </html>

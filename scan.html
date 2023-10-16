@@ -192,11 +192,9 @@
             }
             requestAnimationFrame(tick);
         }
-
         qrcode.callback = function(result) {
             alert("Scanned QR Code: " + result);
         };
-
         function displayRandomNumber() {
             var randomNumber = Math.floor(Math.random() * (12 - 10 + 1)) + 10; // Random number between 10 and 12
             alert("Random Number: " + randomNumber);

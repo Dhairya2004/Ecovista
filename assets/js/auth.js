@@ -56,7 +56,6 @@ onAuthStateChanged(auth, (user) => {
         hideContainer();
         addCoins(0);
         fetchUserinfo();
-        // Load and display the user's coin balance
         const userDocRef = doc(db, "users", user.uid);
     }
     else {
@@ -65,7 +64,6 @@ onAuthStateChanged(auth, (user) => {
 });
 
 
-// Get the container element
 const container = document.querySelector('.container');
 const blurcontent = document.querySelector('.blur-content');
 const signOutButton = document.getElementById("signOutButton");
@@ -120,10 +118,13 @@ const fetchUserinfo = async () => {
 };
 
 const profileContainer = document.querySelector(".profile-container");
+const signOutDiv = document.getElementById("signOutButton");
 
 function showSignOut() {
-    const signOutDiv = document.getElementById("signOutButton");
-    signOutDiv.classList.toggle("show");
+    setTimeout(signOutDiv.classList.toggle("show"), 3000);
 }
 
-profileContainer.addEventListener('click', showSignOut);
+profileContainer.addEventListener('mouseover', showSignOut);
+signOutDiv.addEventListener('mouseover',showSignOut);
+signOutDiv.addEventListener('mouseout',showSignOut);
+profileContainer.addEventListener('mouseout', showSignOut);

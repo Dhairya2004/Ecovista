@@ -22,7 +22,7 @@ const userSignIn = async () => {
     signInWithPopup(auth, provider)
         .then(async (result) => {
             hideContainer();
-
+            addCoins(0);
             const user = result.user;
             console.log(user);
 
@@ -50,6 +50,7 @@ const userSignOut = async () => {
 onAuthStateChanged(auth, (user) => {
     if (user) {
         hideContainer();
+        addCoins(0);
         // Load and display the user's coin balance
         const userDocRef = doc(db, "users", user.uid);
     }
@@ -63,6 +64,24 @@ onAuthStateChanged(auth, (user) => {
 const container = document.querySelector('.container');
 const blurcontent = document.querySelector('.blur-content');
 const signOutButton = document.getElementById("signOutButton");
+
+const coinBalance = document.getElementById("coinBalance");
+
+
+
+const addCoins = async (amount) => {
+    const user = auth.currentUser;
+    if (user) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
+        if (userDoc.exists()) {
+            const currentCoins = userDoc.data().coins || 0;
+            const newCoins = currentCoins + amount;
+            await updateDoc(userDocRef, { coins: newCoins });
+            coinBalance.textContent = newCoins;
+        }
+    }
+};
 
 
 

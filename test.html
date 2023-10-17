@@ -508,7 +508,6 @@
 
         .descriptive {
             flex-grow: 1;
-            border: 2px solid black;
             display: flex;
             flex-direction: column;
             max-width: 250px;
@@ -517,7 +516,10 @@
 
         .desc-items {
             flex-grow: 1;
-            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
         }
 
         .form-scan {
@@ -547,6 +549,9 @@
 
         .coin-container.animate {
             animation: wobblePopUp 1s ease-in-out;
+        }
+        .desc-items p{
+            margin: 0;
         }
     </style>
 </head>
@@ -590,15 +595,26 @@
     <div class="content ">
         <div class="content-left">
             <div class="descriptive">
-                <div class="desc-items">ENTER DETAILS</div>
-                <div class="desc-items">SCAN BATTERY</div>
-                <div class="desc-items">EARN COINS</div>
+                <div class="desc-items">
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/nurse-writing-appointment-details-3359817-2809306.png?f=webp" style=" height: 120px; object-fit: cover; ">
+                    <p><b>Step 1:</b></p>
+                    <p>Fill out Battery Details</p>
+                </div>
+                <div class="desc-items">
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/web-qr-code-scanning-8342178-6676421.png?f=webp" style=" height: 120px; object-fit: cover; ">
+                    <p><b>Step 2:</b></p>
+                    <p>Scan & Verify Battery</p>
+                </div>
+                <div class="desc-items">
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/loyalty-program-5070031-4231661.png?f=webp" style=" height: 120px; object-fit: cover; ">
+                    <p><b>Step 3</b></p>
+                    <p>Earn Ranking & E-coins</p>
+                </div>
             </div>
             <div class="form-scan">
 
                 <form id="batteryForm" style="text-align: left;">
-                    <p style="font-family: 'Bebas Neue', sans-serif;font-size: 25px;"><b>Climb the leaderboard, and earn
-                            exclusive rewards.</b></p>
+                        <p style="font-family: 'Bebas Neue', sans-serif;font-size: 25px;"><b>Juice up your batteries: Earn, Recycle, Dominate!</b></p>
                     <label for="batteryType">Select Battery Type:</label>
                     <select id="batteryType" name="batteryType">
                         <option value="alkaline">Alkaline</option>
@@ -616,7 +632,7 @@
                     <input type="text" id="batteryCapacity" name="batteryCapacity" readonly>
 
                     <label for="batterySpecs">Battery Specifications:</label>
-                    <textarea id="batterySpecs" name="batterySpecs" rows="4" cols="50" readonly></textarea>
+                    <textarea id="batterySpecs" name="batterySpecs"  readonly></textarea>
 
                     <input type="submit" value="Scan Now" id="simulateclick" style="width:auto;padding: 10px 15px;
                 background-color: #00311f;
@@ -635,7 +651,7 @@
                 <div id="header">
                     <h1>Coin Leaderboard</h1>
                     <img src="https://cdni.iconscout.com/illustration/premium/thumb/trophy-4119526-3418167.png"
-                        style="width: 60x; height: 80px; object-fit: cover;" alt="">
+                        style="width: 80x; height: 80px; object-fit: cover;" alt="">
                 </div>
                 <div id="leaderboard">
                     <div class="ribbon"></div>

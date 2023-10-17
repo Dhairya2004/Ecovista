@@ -20,6 +20,9 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <style>
+        .nav{
+            z-index: 5;
+        }
         .login-title {
             font-size: 35px;
             font-weight: 600;
@@ -56,6 +59,8 @@
             justify-content: center;
             align-items: center;
             display: none;
+            position: absolute;
+            z-index: 3;
         }
 
         .login-wrapper {
@@ -69,8 +74,13 @@
 
         .blur-content {
             display: none;
-            filter: blur(10px);
             position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: blur(10px);
+            z-index: 2;
         }
 
         #signInButton {
@@ -125,13 +135,14 @@
             opacity: 0;
             transition: opacity 0.3s ease-in-out;
             cursor: pointer;
-            
+
         }
 
         .signOutButton.show {
             display: block;
             opacity: 1;
         }
+
         .signOutButton.hide {
             display: none;
             opacity: 0;
@@ -173,7 +184,18 @@
 
 
     </div>
-    <div class="blur-content" style="position: absolute; top: 0px;">
+    <div class="blur-content" style="position: absolute; top: 100px;">
+        <div class="content">
+            <!-- Your actual content goes here -->
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio excepturi harum inventore libero voluptates!
+            Totam, eius obcaecati debitis perspiciatis autem odio culpa corrupti quaerat placeat aliquam eos ex commodi
+            tempore.
+            Tenetur eveniet iure quod, non quisquam doloremque omnis labore, commodi perferendis voluptate ipsa facilis
+            est, maxime fuga aliquam nostrum consequatur blanditiis officiis delectus quae inventore similique quaerat
+            reiciendis eum. Nostrum!
+            A dicta dolorum sed commodi asperiores quis eaque, qui fugit tempore sequi laudantium laborum est
+            repudiandae! Vero, enim ex assumenda fugiat est harum porro saepe dolore alias facilis, eos tenetur!
+        </div>
     </div>
 
     <div class="container">

@@ -38,6 +38,7 @@ const userSignIn = async () => {
       hideContainer();
       addCoins(0);
       fetchUserinfo();
+      updateLeaderboard();
       const user = result.user;
       console.log(user);
 
@@ -146,68 +147,71 @@ import {
 // ... Other imports and Firebase setup code ...
 // Function to fetch user data from Firestore and update the leaderboard
 const updateLeaderboard = async () => {
-    const leaderboardTable = document.getElementById("leaderboard-table");
-    const leaderboardTopTable = document.getElementById("leaderboard-top");
-  
-    // Logging to check if leaderboardTable is null
-    console.log("leaderboardTable:", leaderboardTable);
-  
-    // Clear existing rows from the tables
-    leaderboardTable.innerHTML = "";
-    leaderboardTopTable.innerHTML = "";
-  
-    try {
-      // Fetch all users from Firestore
-      const usersSnapshot = await getDocs(collection(db, "users"));
-      const users = [];
-  
-      usersSnapshot.forEach((doc) => {
-        users.push({
-          uid: doc.id,
-          ...doc.data(),
-        });
+  const leaderboardTable = document.getElementById("leaderboard-table");
+  const leaderboardTopTable = document.getElementById("leaderboard-top");
+
+  // Logging to check if leaderboardTable is null
+  console.log("leaderboardTable:", leaderboardTable);
+
+  // Clear existing rows from the tables
+  leaderboardTable.innerHTML = "";
+  leaderboardTopTable.innerHTML = "";
+
+  try {
+    // Fetch all users from Firestore
+    const usersSnapshot = await getDocs(collection(db, "users"));
+    const users = [];
+
+    usersSnapshot.forEach((doc) => {
+      users.push({
+        uid: doc.id,
+        ...doc.data(),
       });
-  
-      // Sort users based on coins in descending order
-      users.sort((a, b) => b.coins - a.coins);
-  
-      // Array of trophy image paths
-      const trophyImages = [
-        "./assets/img/goldtrophy.webp",
-        "./assets/img/silvertrophy.png",
-        "./assets/img/bronzetrophy.png",
-      ];
-  
-      // Update the tables with sorted user data
-      users.forEach((user, index) => {
-        const tr = document.createElement("tr");
-        
-        // Add class "special" to the tr of the user with the second rank
-        if (index === 1) {
-          tr.classList.add("special");
-        }
-        
-        tr.innerHTML = `
+    });
+
+    // Sort users based on coins in descending order
+    users.sort((a, b) => b.coins - a.coins);
+
+    // Array of trophy image paths
+    const trophyImages = [
+      "./assets/img/goldtrophy.webp",
+      "./assets/img/silvertrophy.png",
+      "./assets/img/bronzetrophy.png",
+    ];
+
+    // Update the tables with sorted user data
+    users.forEach((user, index) => {
+      const tr = document.createElement("tr");
+
+      // Add class "special" to the tr of the user with the second rank
+      if (index === 1) {
+        tr.classList.add("special");
+      }
+
+      tr.innerHTML = `
           <td class="number">${index + 1}</td>
           <td class="name">${user.username}</td>
           <td class="points">
             ${user.coins}
-            ${index < trophyImages.length ? `<img class="gold-medal" src="${trophyImages[index]}" alt="trophy" />` : ''}
+            ${
+              index < trophyImages.length
+                ? `<img class="gold-medal" src="${trophyImages[index]}" alt="trophy" />`
+                : ""
+            }
           </td>
         `;
-  
-        if (index === 0) {
-          // Top-ranked user goes to leaderboard-top
-          leaderboardTopTable.appendChild(tr);
-        } else {
-          // Other users go to leaderboard-table
-          leaderboardTable.appendChild(tr);
-        }
-      });
-    } catch (error) {
-      console.error("Error updating leaderboard:", error);
-    }
-  };
-  
-  // Call the updateLeaderboard function on page load
-  window.addEventListener("load", updateLeaderboard);
+
+      if (index === 0) {
+        // Top-ranked user goes to leaderboard-top
+        leaderboardTopTable.appendChild(tr);
+      } else {
+        // Other users go to leaderboard-table
+        leaderboardTable.appendChild(tr);
+      }
+    });
+  } catch (error) {
+    console.error("Error updating leaderboard:", error);
+  }
+};
+
+window.addEventListener("load", updateLeaderboard);

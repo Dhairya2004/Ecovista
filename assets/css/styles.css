@@ -417,12 +417,13 @@ h1 {
   color: white;
   margin: 0;
 }
-
-.source {
-  font-size: 14px;
-  text-align: right;
-  margin-top: 10px;
-  opacity: 0;
+.video-description {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-align: center;
 }
 
 .fade-in {

@@ -15,14 +15,16 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gabarito:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Poppins&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <style>
-        .nav{
+        .nav {
             z-index: 5;
         }
+
         .login-title {
             font-size: 35px;
             font-weight: 600;
@@ -63,6 +65,11 @@
             z-index: 3;
         }
 
+        .nav {
+            background-color: white;
+            height: 80px;
+        }
+
         .login-wrapper {
             width: 380px;
             background-color: white;
@@ -79,7 +86,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            filter: blur(10px);
+            backdrop-filter: blur(10px);
             z-index: 2;
         }
 
@@ -94,11 +101,12 @@
             position: absolute;
             right: 40px;
             display: flex;
+            align-items: center;
         }
 
         .coins {
             width: auto;
-            height: 25px;
+            height: 45px;
             background-color: #00311f;
             border-radius: 60px;
             border: 2px solid #00311f;
@@ -121,6 +129,25 @@
 
         #coinBalance {
             margin-right: 5px;
+        }
+
+        .content {
+            position: absolute;
+            z-index: 1;
+            height: 100%;
+            width: 100%;
+            min-height: 100vh;
+            background-color: #fbfaff;
+            display: flex;
+            margin: 0;
+            justify-content: flex-end;
+            overflow: hidden;
+        }
+
+        * {
+
+            box-sizing: border-box;
+
         }
 
         .signOutButton {
@@ -147,13 +174,254 @@
             display: none;
             opacity: 0;
         }
+
+        * {
+
+            box-sizing: border-box;
+
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        main {
+            width: 30rem;
+            height: 13rem;
+            background-color: #ffffff;
+            -webkit-box-shadow: 0px 5px 15px 8px #e4e7fb;
+            box-shadow: 0px 5px 15px 8px #e4e7fb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 1rem;
+            margin-right: 80px;
+            margin-top: 100px;
+        }
+
+        #header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 2rem;
+        }
+
+        .share {
+            width: 4.5rem;
+            height: 3rem;
+            background-color: #f55e77;
+            border: 0;
+            border-bottom: 0.2rem solid #c0506a;
+            border-radius: 2rem;
+            cursor: pointer;
+        }
+
+        .share:active {
+            border-bottom: 0;
+        }
+
+        .share i {
+            color: #fff;
+            font-size: 2rem;
+        }
+
+        h1 {
+            font-family: "Rubik", sans-serif;
+            font-size: 1.7rem;
+            color: #141a39;
+            text-transform: uppercase;
+            cursor: default;
+        }
+
+        #leaderboard {
+            width: 100%;
+            border-radius: 1rem;
+            position: relative;
+            -webkit-box-shadow: 0px 5px 15px 8px #e4e7fb;
+            box-shadow: 0px 5px 15px 8px #e4e7fb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            color: #141a39;
+
+            cursor: default;
+        }
+
+        tr {
+            transition: all 0.2s ease-in-out;
+            border-radius: 0.2rem;
+
+        }
+
+        tr:not(:first-child):hover {
+            background-color: #fff;
+            transform: scale(1.1);
+            -webkit-box-shadow: 0px 5px 15px 8px #e4e7fb;
+            box-shadow: 0px 5px 15px 8px #e4e7fb;
+        }
+
+        tr.special:hover {
+            background-color: #fff;
+            transform: scale(1.1);
+            -webkit-box-shadow: 0px 5px 15px 8px #e4e7fb;
+            box-shadow: 0px 5px 15px 8px #e4e7fb;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+
+        td {
+            height: 5rem;
+            font-family: "Rubik", sans-serif;
+            font-size: 1.4rem;
+            padding: 1rem 2rem;
+            position: relative;
+        }
+
+        .number {
+            width: 1rem;
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .name {
+            text-align: left;
+            font-size: 1.2rem;
+        }
+
+        .points {
+            font-weight: bold;
+            font-size: 1.3rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .points:first-child {
+            width: 10rem;
+        }
+
+        .gold-medal {
+            height: 3rem;
+            margin-left: 1.5rem;
+        }
+
+        .ribbon {
+            width: 32rem;
+            height: 5.5rem;
+            top: -0.5rem;
+            background-color: #00311f;
+            position: absolute;
+            left: -1rem;
+            -webkit-box-shadow: 0px 15px 11px -6px #7a7a7d;
+            box-shadow: 0px 15px 11px -6px #7a7a7d;
+        }
+
+        .ribbon::before {
+            content: "";
+            height: 1.5rem;
+            width: 1.5rem;
+            bottom: -0.8rem;
+            left: 0.35rem;
+            transform: rotate(45deg);
+            background-color: #00311f;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .ribbon::after {
+            content: "";
+            height: 1.5rem;
+            width: 1.5rem;
+            bottom: -0.8rem;
+            right: 0.35rem;
+            transform: rotate(45deg);
+            background-color: #00311f;
+            position: absolute;
+            z-index: -1;
+        }
+
+        #buttons {
+            width: 100%;
+            margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .exit {
+            width: 11rem;
+            height: 3rem;
+            font-family: "Rubik", sans-serif;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            color: #7e7f86;
+            border: 0;
+            background-color: #fff;
+            border-radius: 2rem;
+            cursor: pointer;
+        }
+
+        .exit:hover {
+            border: 0.1rem solid #00311f;
+        }
+
+        .continue {
+            width: 11rem;
+            height: 3rem;
+            font-family: "Rubik", sans-serif;
+            font-size: 1.3rem;
+            color: #fff;
+            text-transform: uppercase;
+            background-color: #00311f;
+            border: 0;
+            border-bottom: 0.2rem solid #3838b8;
+            border-radius: 2rem;
+            cursor: pointer;
+        }
+
+        .continue:active {
+            border-bottom: 0;
+        }
+
+        @media (max-width: 740px) {
+            * {
+                font-size: 70%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            * {
+                font-size: 55%;
+            }
+        }
+
+        @media (max-width: 390px) {
+            * {
+                font-size: 45%;
+            }
+        }
+
+
+        .table-container {
+            max-height: 25rem;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
     </style>
 </head>
 
 <body>
     <div class="nav">
         <div class="logo">
-            <img src="assets\img\logo.png" width="80px">
+            <img src="assets\img\logo.png" width="50px">
         </div>
 
         <div class="nav-item">
@@ -177,7 +445,7 @@
             </div>
             <div class="profile-container">
                 <img id="profile-picture" src="assets/img/profile.png" alt="Cropped Image"
-                    style="width: 44px; height: 44px; object-fit: cover; border-radius: 50%; border: 3px solid #00311f; margin: 0px;">
+                    style="width: 44x; height: 44px; object-fit: cover; border-radius: 50%; border: 3px solid #00311f; margin: 0px;">
             </div>
             <div id="signOutButton" class="signOutButton">SignOut</div>
         </div>
@@ -185,17 +453,28 @@
 
     </div>
     <div class="blur-content" style="position: absolute; top: 100px;">
-        <div class="content">
-            <!-- Your actual content goes here -->
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio excepturi harum inventore libero voluptates!
-            Totam, eius obcaecati debitis perspiciatis autem odio culpa corrupti quaerat placeat aliquam eos ex commodi
-            tempore.
-            Tenetur eveniet iure quod, non quisquam doloremque omnis labore, commodi perferendis voluptate ipsa facilis
-            est, maxime fuga aliquam nostrum consequatur blanditiis officiis delectus quae inventore similique quaerat
-            reiciendis eum. Nostrum!
-            A dicta dolorum sed commodi asperiores quis eaque, qui fugit tempore sequi laudantium laborum est
-            repudiandae! Vero, enim ex assumenda fugiat est harum porro saepe dolore alias facilis, eos tenetur!
-        </div>
+    </div>
+    <div class="content">
+        <main>
+            <div id="header">
+                <h1>Coin Leaderboard</h1>
+                <!-- <span class="material-symbols-outlined" style="font-size: 40px; color:orange;">
+                    trophy
+                    </span> -->
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/trophy-4119526-3418167.png" style="width: 60x; height: 80px; object-fit: cover;" alt="">
+            </div>
+            <div id="leaderboard">
+                <div class="ribbon"></div>
+                <table id="leaderboard-top" style="color: #fff;">
+                </table>
+                <div class="table-container">
+                    <table id="leaderboard-table">
+                    </table>
+
+                </div>
+                <br>
+            </div>
+        </main>
     </div>
 
     <div class="container">

@@ -4,46 +4,677 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVista</title>
+    <link rel="stylesheet" href="assets\css\styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gabarito:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Poppins&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
     <style>
-        body {
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            width: 80%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        select,
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            background-color: #00311f;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #000000;
+        }
+
+        /* Styles for QR Code Scanner */
+        #qr-video {
+            width: 80%;
+            height: 80%;
+            border-radius: 1rem;
+        }
+
+        #qr-canvas {
+            display: none;
+        }
+
+        .scan {
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+            display: none;
+            /* Initially hide the scanner */
+        }
+
+        .scan::before {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.5);
+            animation: scan 2s infinite linear;
+        }
+
+        @keyframes scan {
+            from {
+                top: -100%;
+            }
+
+            to {
+                top: 100%;
+            }
+        }
+
+
+        .nav {
+            z-index: 5;
+        }
+
+        .login-title {
+            font-size: 35px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 80px;
+            color: #fff;
+            user-select: none;
+            border-radius: 15px 15px 0 0;
+            background: #00251f;
+        }
+
+        .btn-sign {
+            color: black;
+            font-size: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            background: white;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            padding: 10px;
+            margin: 10px;
+            border: 2px solid black;
+        }
+
+        .google-icon {
+            position: relative;
+            top: 3px;
+            margin: 0 10px;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            display: none;
+            position: absolute;
+            z-index: 3;
+        }
+
+        .nav {
+            background-color: white;
+            height: 80px;
+        }
+
+        .login-wrapper {
+            width: 380px;
+            background-color: white;
+            border: 3px solid #00311f;
+            border-radius: 20px;
+            box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+            opacity: 100%;
+        }
+
+        .blur-content {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            z-index: 2;
+        }
+
+        #signInButton {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             margin: 0;
         }
 
-        #about {
+        .nav-right {
+            position: absolute;
+            right: 40px;
             display: flex;
-            width: 80%;
-            padding: 20px;
+            align-items: center;
         }
 
-        #column1 {
-            flex: 30%;
+        .coins {
+            width: auto;
+            height: 45px;
+            background-color: #00311f;
+            border-radius: 60px;
+            border: 2px solid #00311f;
+            padding: 10px 15px;
+            margin: 0 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        #column2 {
-            flex: 50%;
+        .coin-container {
+            font-weight: bold;
+            color: white;
+            display: flex;
+        }
+
+        .coin-count {
+            margin-right: 5px;
+        }
+
+        #coinBalance {
+            margin-right: 5px;
+        }
+
+        .content {
+            position: absolute;
+            z-index: 1;
+            height: 100%;
+            width: 100%;
+            min-height: 100vh;
+            background-color: #fbfaff;
+            display: flex;
+            margin: 0;
+            justify-content: space-around;
+            overflow: hidden;
+            align-items: center;
+        }
+
+
+
+        .signOutButton {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: -15px;
+            background-color: lightgray;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 3px 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            cursor: pointer;
+
+        }
+
+        .signOutButton.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .signOutButton.hide {
+            display: none;
+            opacity: 0;
+        }
+
+        * {
+
+            box-sizing: border-box;
+
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        main {
+            width: 30rem;
+            height: 80%;
+            background-color: #ffffff;
+            -webkit-box-shadow: 0px 5px 15px 8px #e4e7fb;
+            box-shadow: 0px 5px 15px 8px #e4e7fb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 1rem;
+            margin-top: 100px;
+
+        }
+
+        #header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 2rem;
+        }
+
+        .share {
+            width: 4.5rem;
+            height: 3rem;
+            background-color: #f55e77;
+            border: 0;
+            border-bottom: 0.2rem solid #c0506a;
+            border-radius: 2rem;
+            cursor: pointer;
+        }
+
+        .share:active {
+            border-bottom: 0;
+        }
+
+        .share i {
+            color: #fff;
+            font-size: 2rem;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: #141a39;
+            text-transform: uppercase;
+            cursor: default;
+        }
+
+        #leaderboard {
+            width: 100%;
+            height: 82%;
+            border-radius: 1rem;
+            position: relative;
+            -webkit-box-shadow: 0px 5px 15px 8px #e4e7fb;
+            box-shadow: 0px 5px 15px 8px #e4e7fb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            color: #141a39;
+
+            cursor: default;
+        }
+
+        tr {
+            transition: all 0.2s ease-in-out;
+            border-radius: 0.2rem;
+
+        }
+
+        tr:not(:first-child):hover {
+            background-color: #fff;
+            transform: scale(1.1);
+            -webkit-box-shadow: 0px 5px 15px 8px #e4e7fb;
+            box-shadow: 0px 5px 15px 8px #e4e7fb;
+        }
+
+        tr.special:hover {
+            background-color: #fff;
+            transform: scale(1.1);
+            -webkit-box-shadow: 0px 5px 15px 8px #e4e7fb;
+            box-shadow: 0px 5px 15px 8px #e4e7fb;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+
+        td {
+            height: 5rem;
+            font-family: "Rubik", sans-serif;
+            font-size: 1.4rem;
+            padding: 1rem 2rem;
+            position: relative;
+        }
+
+        .number {
+            width: 1rem;
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .name {
+            text-align: left;
+            font-size: 1.2rem;
+        }
+
+        .points {
+            font-weight: bold;
+            font-size: 1.3rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .points:first-child {
+            width: 10rem;
+        }
+
+        .gold-medal {
+            height: 3rem;
+            margin-left: 1.5rem;
+        }
+
+        .ribbon {
+            width: 32rem;
+            height: 5rem;
+            top: -0.rem;
+            background-color: #00311f;
+            position: absolute;
+            left: -1rem;
+            -webkit-box-shadow: 0px 15px 11px -6px #7a7a7d;
+            box-shadow: 0px 15px 11px -6px #7a7a7d;
+        }
+
+        .ribbon::before {
+            content: "";
+            height: 1.5rem;
+            width: 1.5rem;
+            bottom: -0.8rem;
+            left: 0.35rem;
+            transform: rotate(45deg);
+            background-color: #00311f;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .ribbon::after {
+            content: "";
+            height: 1.5rem;
+            width: 1.5rem;
+            bottom: -0.8rem;
+            right: 0.35rem;
+            transform: rotate(45deg);
+            background-color: #00311f;
+            position: absolute;
+            z-index: -1;
+        }
+
+        #buttons {
+            width: 100%;
+            margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .exit {
+            width: 11rem;
+            height: 3rem;
+            font-family: "Rubik", sans-serif;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            color: #7e7f86;
+            border: 0;
+            background-color: #fff;
+            border-radius: 2rem;
+            cursor: pointer;
+        }
+
+        .exit:hover {
+            border: 0.1rem solid #00311f;
+        }
+
+        .continue {
+            width: 11rem;
+            height: 3rem;
+            font-family: "Rubik", sans-serif;
+            font-size: 1.3rem;
+            color: #fff;
+            text-transform: uppercase;
+            background-color: #00311f;
+            border: 0;
+            border-bottom: 0.2rem solid #3838b8;
+            border-radius: 2rem;
+            cursor: pointer;
+        }
+
+        .continue:active {
+            border-bottom: 0;
+        }
+
+        @media (max-width: 740px) {
+            * {
+                font-size: 70%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            * {
+                font-size: 55%;
+            }
+        }
+
+        @media (max-width: 390px) {
+            * {
+                font-size: 45%;
+            }
+        }
+
+
+        .table-container {
+            max-height: 80%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .content-left {
+            border-radius: 1rem;
+            margin-top: 50px;
+            width: 60%;
+            height: 80%;
+            -webkit-box-shadow: 0px 5px 15px 8px #e4e7fb;
+            box-shadow: 0px 5px 15px 8px #e4e7fb;
+            background-color: white;
+            display: flex;
+        }
+
+        .descriptive {
+            flex-grow: 1;
+            border: 2px solid black;
+            display: flex;
+            flex-direction: column;
+            max-width: 250px;
+            min-width: 250px;
+        }
+
+        .desc-items {
+            flex-grow: 1;
+            border: 2px solid black;
+        }
+
+        .form-scan {
+            flex-grow: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content-right {
+            width: 35%;
+            height: 100vh;
+
+        }
+
+        select,
+        input,
+        textarea {
+            font-family: "Poppins", sans-serif;
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border-radius: 8px;
+            /* Rounded corners */
+        }
+
+        .coin-container.animate {
+            animation: wobblePopUp 1s ease-in-out;
         }
     </style>
 </head>
 
 <body>
-    <div id="about">
-        <div id="column1">
-            <h1>WHO ARE WE ?</h1>
+    <div class="nav">
+        <div class="logo">
+            <img src="assets\img\logo.png" width="50px">
         </div>
-        <div id="column2">
-            <p>EcoVista is your friendly eco-buddy on the web! It's the go-to place for real-time environmental
-                insights, like air quality and carbon footprint. But here's the cool part—EcoVista is also all about
-                recycling. Users can scan batteries, earn points, and be recycling superheroes. The platform is not just
-                informative; it's a hub for eco-campaigns, eco-friendly products, and inspiring stories from the
-                community about saving the planet. Oh, and by helping the government track household batteries, EcoVista
-                is on a mission to reduce e-waste. It's not just a website; it's EcoVista—everyone's guide to a chill,
-                green lifestyle! </p>
+
+        <div class="nav-item">
+            <div class="item"><a href="index.html">Home</a></div>
+            <div class="item active">EcoHub</div>
+            <a href="insights.html">
+                <div class="item">Insights</div>
+            </a>
+            <div class="item">Impact</div>
+        </div>
+
+        <div class="nav-right">
+            <div class="coins">
+                <span class="material-symbols-outlined" style="color: white; margin-right: 10px;">
+                    store
+                </span>
+                <span class="coin-container">
+                    <p><span id="coinBalance">-</span></p>
+                    <p>Coins</p>
+                </span>
+            </div>
+            <div class="profile-container">
+                <img id="profile-picture" src="assets/img/profile.png" alt="Cropped Image"
+                    style="width: 44x; height: 44px; object-fit: cover; border-radius: 50%; border: 3px solid #00311f; margin: 0px;">
+            </div>
+            <div id="signOutButton" class="signOutButton">SignOut</div>
+        </div>
+
+
+    </div>
+    <div class="blur-content" style="position: absolute; top: 100px;">
+    </div>
+    <div class="content ">
+        <div class="content-left">
+            <div class="descriptive">
+                <div class="desc-items">ENTER DETAILS</div>
+                <div class="desc-items">SCAN BATTERY</div>
+                <div class="desc-items">EARN COINS</div>
+            </div>
+            <div class="form-scan">
+
+                <form id="batteryForm" style="text-align: left;">
+                    <p style="font-family: 'Bebas Neue', sans-serif;font-size: 25px;"><b>Climb the leaderboard, and earn
+                            exclusive rewards.</b></p>
+                    <label for="batteryType">Select Battery Type:</label>
+                    <select id="batteryType" name="batteryType">
+                        <option value="alkaline">Alkaline</option>
+                        <option value="lithium">Lithium</option>
+                        <option value="rechargeable">Rechargeable (NiMH)</option>
+                    </select>
+
+                    <label for="batteryBrand">Select Battery Brand:</label>
+                    <select id="batteryBrand" name="batteryBrand"></select>
+
+                    <label for="batterySize">Select Battery Size:</label>
+                    <select id="batterySize" name="batterySize"></select>
+
+                    <label for="batteryCapacity">Battery Capacity:</label>
+                    <input type="text" id="batteryCapacity" name="batteryCapacity" readonly>
+
+                    <label for="batterySpecs">Battery Specifications:</label>
+                    <textarea id="batterySpecs" name="batterySpecs" rows="4" cols="50" readonly></textarea>
+
+                    <input type="submit" value="Scan Now" id="simulateclick" style="width:auto;padding: 10px 15px;
+                background-color: #00311f;
+                border-radius: 60px; ">
+                </form>
+
+                <!-- QR Code Scanner Section -->
+                <div class="scan" style="text-align: center;">
+                    <video id="qr-video" alt="QR Code Scanner"></video>
+                    <p id="loadingMessage">Click 'Scan Now' to start scanning.</p>
+                </div>
+            </div>
+        </div>
+        <div class="content-right">
+            <main>
+                <div id="header">
+                    <h1>Coin Leaderboard</h1>
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/trophy-4119526-3418167.png"
+                        style="width: 60x; height: 80px; object-fit: cover;" alt="">
+                </div>
+                <div id="leaderboard">
+                    <div class="ribbon"></div>
+                    <table id="leaderboard-top" style="color: #fff;">
+                    </table>
+                    <div class="table-container">
+                        <table id="leaderboard-table">
+                        </table>
+
+                    </div>
+                    <br>
+                </div>
+            </main>
         </div>
     </div>
+
+    <div class="container">
+        <div class="login-wrapper">
+            <div class="login-title">
+                Access Denied
+            </div>
+            <div style="text-align: center; margin: 20px 0;">
+                <p>Access to EcoHub requires authentication. Please log in to <b>Explore & Earn</b> rewards.
+                </p>
+            </div>
+            <div class="field" style="display: flex; justify-content: center; align-items: center;">
+                <button id="signInButton" class="btn-sign">
+                    <span>
+                        <img class="google-icon"
+                            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
+                    </span>
+                    Sign-in with Google &nbsp;</button>
+            </div>
+            <br>
+        </div>
+    </div>
+
+    <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+    <script type="module" src="assets/js/auth.js"></script>
 </body>
 
 </html>

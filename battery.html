@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery Selector</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        select,
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Battery Selector</h2>
+
+    <form id="batteryForm">
+        <label for="batteryType">Select Battery Type:</label>
+        <select id="batteryType" name="batteryType">
+            <option value="alkaline">Alkaline</option>
+            <option value="lithium">Lithium</option>
+            <option value="rechargeable">Rechargeable (NiMH)</option>
+        </select>
+
+        <label for="batteryBrand">Select Battery Brand:</label>
+        <select id="batteryBrand" name="batteryBrand"></select>
+
+        <label for="batterySize">Select Battery Size:</label>
+        <select id="batterySize" name="batterySize"></select>
+
+        <label for="batteryCapacity">Battery Capacity:</label>
+        <input type="text" id="batteryCapacity" name="batteryCapacity" readonly>
+
+        <label for="batterySpecs">Battery Specifications:</label>
+        <textarea id="batterySpecs" name="batterySpecs" rows="4" cols="50" readonly></textarea>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        const specsData = {
+            alkaline: {
+                duracell: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2500mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1200mAh' } },
+                energizer: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2700mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1000mAh' } },
+                eveready: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2400mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1100mAh' } },
+                panasonic: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2600mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1300mAh' } },
+                rayovac: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2300mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1000mAh' } }
+            },
+            lithium: {
+                energizer: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 3000mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1500mAh' }, 'Coin Cells': 'Voltage: 3V' },
+                duracell: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2800mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1200mAh' }, 'Coin Cells': 'Voltage: 3V' },
+                panasonic: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 3200mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1700mAh' }, 'Coin Cells': 'Voltage: 3V' },
+                sony: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 3000mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1400mAh' }, 'Coin Cells': 'Voltage: 3V' }
+            },
+            rechargeable: {
+                duracell: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 2000mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 800mAh' } },
+                energizer: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 2200mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 1000mAh' } },
+                panasonic: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 2100mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 900mAh' } },
+                sony: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 1900mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 750mAh' } },
+                gp: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 1800mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 700mAh' } }
+            }
+        };
+
+        const batteryTypeDropdown = document.getElementById('batteryType');
+        const batteryBrandDropdown = document.getElementById('batteryBrand');
+        const batterySizeDropdown = document.getElementById('batterySize');
+        const batteryCapacityInput = document.getElementById('batteryCapacity');
+        const batterySpecsTextarea = document.getElementById('batterySpecs');
+
+        function populateDropdown(element, options) {
+            element.innerHTML = '';
+            options.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option;
+                optionElement.textContent = option;
+                element.appendChild(optionElement);
+            });
+        }
+
+        function updateBrandDropdown() {
+            const selectedType = batteryTypeDropdown.value;
+            const brands = Object.keys(specsData[selectedType]);
+            populateDropdown(batteryBrandDropdown, brands);
+            populateBatterySizeDropdown();
+        }
+
+        function populateBatterySizeDropdown() {
+            const selectedType = batteryTypeDropdown.value;
+            const selectedBrand = batteryBrandDropdown.value;
+            const sizes = Object.keys(specsData[selectedType][selectedBrand]);
+            populateDropdown(batterySizeDropdown, sizes);
+            displayBatterySpecs();
+        }
+
+        function displayBatterySpecs() {
+            const selectedType = batteryTypeDropdown.value;
+            const selectedBrand = batteryBrandDropdown.value;
+            const selectedSize = batterySizeDropdown.value;
+            const specs = specsData[selectedType][selectedBrand][selectedSize];
+            const voltage = specs.voltage || specs; // Handle both cases
+            const capacity = specs.capacity || ''; // Handle both cases
+
+            batterySpecsTextarea.value = `${voltage}\n${capacity}`;
+            batteryCapacityInput.value = capacity;
+        }
+
+        // Event listeners
+        batteryTypeDropdown.addEventListener('change', updateBrandDropdown);
+        batteryBrandDropdown.addEventListener('change', populateBatterySizeDropdown);
+        batterySizeDropdown.addEventListener('change', displayBatterySpecs);
+
+        // Initial population on page load
+        updateBrandDropdown();
+    </script>
+
+</body>
+
+</html>

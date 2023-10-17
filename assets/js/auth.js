@@ -97,6 +97,7 @@ const addCoins = async (amount) => {
       const newCoins = currentCoins + amount;
       await updateDoc(userDocRef, { coins: newCoins });
       coinBalance.textContent = newCoins;
+      updateLeaderboard();
     }
   }
 };
@@ -195,3 +196,225 @@ signOutDiv.addEventListener("mouseover", showSignOut);
 signOutDiv.addEventListener("mouseout", showSignOut);
 profileContainer.addEventListener("mouseover", showSignOut);
 profileContainer.addEventListener("mouseout", showSignOut);
+
+var video = document.querySelector("#qr-video");
+var canvasElement = document.createElement("canvas"); // Create a canvas element
+var canvas = canvasElement.getContext("2d");
+var loadingMessage = document.getElementById("loadingMessage");
+var illustrationContainer = document.querySelector('.illustration');
+var scanContainer = document.querySelector('.scan');
+var batteryForm = document.getElementById('batteryForm');
+
+function startScanning() {
+    // Hide the form
+    batteryForm.style.display = 'none';
+
+    // Check if illustrationContainer exists before trying to modify its style
+    if (illustrationContainer) {
+        illustrationContainer.style.display = 'none'; // Hide the illustration
+    }
+
+    scanContainer.style.display = 'block'; // Show the scanner
+
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function (stream) {
+        video.srcObject = stream;
+        video.setAttribute("playsinline", true);
+        video.play();
+
+        // Check if video stream has started before proceeding
+        video.onloadedmetadata = function () {
+            var scanDuration = Math.floor(Math.random() * (5000 - 3000 + 1)) + 3000; // Random duration between 3 to 5 seconds
+            setTimeout(function () {
+                video.pause();
+                loadingMessage.innerText = "📷 Scanning complete!";
+                displayRandomNumber();
+            }, scanDuration);
+            requestAnimationFrame(tick);
+            loadingMessage.innerText = "📷 Scanning...";
+        };
+    }).catch(function (error) {
+        console.error("Error accessing camera:", error);
+        loadingMessage.innerText = "❌ Unable to access camera. Please check your settings and reload the page.";
+    });
+}
+
+
+
+function tick() {
+    if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        canvasElement.width = video.videoWidth;
+        canvasElement.height = video.videoHeight;
+        canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+        var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+        try {
+            qrcode.decode();
+        } catch (e) {
+            setTimeout(tick, 1000);
+            return;
+        }
+    }
+    requestAnimationFrame(tick);
+}
+
+qrcode.callback = function (result) {
+    alert("Scanned QR Code: " + result);
+};
+
+let checkstate = false;
+
+document.addEventListener("DOMContentLoaded", function() {
+  var clickableElement = document.getElementById("simulateclick");
+
+  clickableElement.addEventListener("contextmenu", function(event) {
+    event.preventDefault(); // Prevent the default context menu
+    checkstate = true;
+  });
+
+  clickableElement.addEventListener("click", function(event) {
+    if (event.button === 0) {
+      checkstate = false;
+    }
+  });
+});
+
+function displayRandomNumber() {
+    // Check if illustrationContainer exists before trying to modify its style
+    var illustrationContainer = document.querySelector('.illustration');
+    if (illustrationContainer) {
+        illustrationContainer.style.display = 'block'; // Show the illustration
+    }
+
+    var scanContainer = document.querySelector('.scan');
+    if (scanContainer) {
+        scanContainer.style.display = 'none'; // Hide the scanner
+    }
+
+    // Show the form
+    batteryForm.style.display = 'block';
+    var randomNumber = Math.floor(Math.random() * 3) + 1;
+    
+
+    if(checkstate===true){
+      addCoins(randomNumber) 
+      var coinContainer = document.querySelector('.coin-container');
+      coinContainer.classList.add('animate');
+
+      // Simulate the "addCoins" function (you can replace this with your actual logic)
+      setTimeout(function() {
+        coinContainer.classList.remove('animate');
+      }, 1000); // Assuming the animation duration is 1s
+
+      // Listen for the end of the video stream
+      video.onended = function () {
+          resetScanning();
+      };
+    }else{
+      alert("Couldn't Verify Battery... Try Again")
+    }
+
+    // Stop the video stream
+    var tracks = video.srcObject.getTracks();
+    tracks.forEach(track => track.stop());
+
+    // Reset the form or perform any other necessary actions
+    resetScanning();
+}
+
+
+function resetScanning() {
+    scanContainer.style.display = 'none'; // Hide the scanner
+    illustrationContainer.style.display = 'block'; // Show the illustration
+    loadingMessage.innerText = "Click 'Scan Now' to start scanning.";
+    video.currentTime = 0;
+}
+
+
+
+// Your existing event listeners and functions here
+// ...
+
+// Modify the submit event of the form to trigger the startScanning function
+document.getElementById('simulateclick').addEventListener('contextmenu', function (e) {
+    e.preventDefault(); // Prevent the default form submission
+    startScanning(); // Start the QR code scanning process
+});
+document.getElementById('simulateclick').addEventListener('click', function (e) {
+    e.preventDefault(); // Prevent the default form submission
+    startScanning(); // Start the QR code scanning process
+});
+
+
+
+const specsData = {
+    alkaline: {
+        duracell: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2500mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1200mAh' } },
+        energizer: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2700mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1000mAh' } },
+        eveready: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2400mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1100mAh' } },
+        panasonic: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2600mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1300mAh' } },
+        rayovac: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2300mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1000mAh' } }
+    },
+    lithium: {
+        energizer: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 3000mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1500mAh' }, 'Coin Cells': 'Voltage: 3V' },
+        duracell: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2800mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1200mAh' }, 'Coin Cells': 'Voltage: 3V' },
+        panasonic: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 3200mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1700mAh' }, 'Coin Cells': 'Voltage: 3V' },
+        sony: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 3000mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1400mAh' }, 'Coin Cells': 'Voltage: 3V' }
+    },
+    rechargeable: {
+        duracell: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 2000mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 800mAh' } },
+        energizer: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 2200mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 1000mAh' } },
+        panasonic: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 2100mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 900mAh' } },
+        sony: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 1900mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 750mAh' } },
+        gp: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 1800mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 700mAh' } }
+    }
+};
+
+const batteryTypeDropdown = document.getElementById('batteryType');
+const batteryBrandDropdown = document.getElementById('batteryBrand');
+const batterySizeDropdown = document.getElementById('batterySize');
+const batteryCapacityInput = document.getElementById('batteryCapacity');
+const batterySpecsTextarea = document.getElementById('batterySpecs');
+
+function populateDropdown(element, options) {
+    element.innerHTML = '';
+    options.forEach(option => {
+        const optionElement = document.createElement('option');
+        optionElement.value = option;
+        optionElement.textContent = option;
+        element.appendChild(optionElement);
+    });
+}
+
+function updateBrandDropdown() {
+    const selectedType = batteryTypeDropdown.value;
+    const brands = Object.keys(specsData[selectedType]);
+    populateDropdown(batteryBrandDropdown, brands);
+    populateBatterySizeDropdown();
+}
+
+function populateBatterySizeDropdown() {
+    const selectedType = batteryTypeDropdown.value;
+    const selectedBrand = batteryBrandDropdown.value;
+    const sizes = Object.keys(specsData[selectedType][selectedBrand]);
+    populateDropdown(batterySizeDropdown, sizes);
+    displayBatterySpecs();
+}
+
+function displayBatterySpecs() {
+    const selectedType = batteryTypeDropdown.value;
+    const selectedBrand = batteryBrandDropdown.value;
+    const selectedSize = batterySizeDropdown.value;
+    const specs = specsData[selectedType][selectedBrand][selectedSize];
+    const voltage = specs.voltage || specs; // Handle both cases
+    const capacity = specs.capacity || ''; // Handle both cases
+
+    batterySpecsTextarea.value = `${voltage}\n${capacity}`;
+    batteryCapacityInput.value = capacity;
+}
+
+// Event listeners
+batteryTypeDropdown.addEventListener('change', updateBrandDropdown);
+batteryBrandDropdown.addEventListener('change', populateBatterySizeDropdown);
+batterySizeDropdown.addEventListener('change', displayBatterySpecs);
+
+// Initial population on page load
+updateBrandDropdown();

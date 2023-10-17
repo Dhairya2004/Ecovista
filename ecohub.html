@@ -21,6 +21,86 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <style>
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        select,
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Styles for QR Code Scanner */
+        #qr-video {
+            width: 100%;
+            height: 100%;
+        }
+
+        #qr-canvas {
+            display: none;
+        }
+
+        .scan {
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+            display: none;
+            /* Initially hide the scanner */
+        }
+
+        .scan::before {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.5);
+            animation: scan 2s infinite linear;
+        }
+
+        @keyframes scan {
+            from {
+                top: -100%;
+            }
+
+            to {
+                top: 100%;
+            }
+        }
+
+
         .nav {
             z-index: 5;
         }
@@ -140,15 +220,12 @@
             background-color: #fbfaff;
             display: flex;
             margin: 0;
-            justify-content: flex-end;
+            justify-content: space-between;
             overflow: hidden;
+            align-items: flex-start;
         }
 
-        * {
 
-            box-sizing: border-box;
-
-        }
 
         .signOutButton {
             display: none;
@@ -415,6 +492,31 @@
             overflow-x: hidden;
             overflow-y: scroll;
         }
+
+        .content-left {
+            margin-top: 100px;
+            display: flex;
+            justify-content: space-evenly;
+            position: relative;
+            width: 50%;
+        }
+
+        .content-right {
+            width: 35%;
+            height: 100vh;
+            min-width: 500px;
+        }
+
+        select,
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border-radius: 8px;
+            /* Rounded corners */
+        }
     </style>
 </head>
 
@@ -454,27 +556,64 @@
     </div>
     <div class="blur-content" style="position: absolute; top: 100px;">
     </div>
-    <div class="content">
-        <main>
-            <div id="header">
-                <h1>Coin Leaderboard</h1>
-                <!-- <span class="material-symbols-outlined" style="font-size: 40px; color:orange;">
+    <div class="content " >
+        <div class="discover" style="width: 500px;height: 100vh; background-color: #3838b8;"></div>
+
+        <div class="content-left">
+            <!-- Battery Selector Form -->
+            <form id="batteryForm" style="text-align: center;">
+                p
+                <label for="batteryType">Select Battery Type:</label>
+                <select id="batteryType" name="batteryType">
+                    <option value="alkaline">Alkaline</option>
+                    <option value="lithium">Lithium</option>
+                    <option value="rechargeable">Rechargeable (NiMH)</option>
+                </select>
+
+                <label for="batteryBrand">Select Battery Brand:</label>
+                <select id="batteryBrand" name="batteryBrand"></select>
+
+                <label for="batterySize">Select Battery Size:</label>
+                <select id="batterySize" name="batterySize"></select>
+
+                <label for="batteryCapacity">Battery Capacity:</label>
+                <input type="text" id="batteryCapacity" name="batteryCapacity" readonly>
+
+                <label for="batterySpecs">Battery Specifications:</label>
+                <textarea id="batterySpecs" name="batterySpecs" rows="4" cols="50" readonly></textarea>
+
+                <input type="submit" value="Scan Now">
+            </form>
+
+            <!-- QR Code Scanner Section -->
+            <div class="scan">
+                <video id="qr-video" alt="QR Code Scanner"></video>
+                <p id="loadingMessage">Click 'Scan Now' to start scanning.</p>
+            </div>
+        </div>
+        <div class="content-right">
+            <main>
+                <div id="header">
+                    <h1>Coin Leaderboard</h1>
+                    <!-- <span class="material-symbols-outlined" style="font-size: 40px; color:orange;">
                     trophy
                     </span> -->
-                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/trophy-4119526-3418167.png" style="width: 60x; height: 80px; object-fit: cover;" alt="">
-            </div>
-            <div id="leaderboard">
-                <div class="ribbon"></div>
-                <table id="leaderboard-top" style="color: #fff;">
-                </table>
-                <div class="table-container">
-                    <table id="leaderboard-table">
-                    </table>
-
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/trophy-4119526-3418167.png"
+                        style="width: 60x; height: 80px; object-fit: cover;" alt="">
                 </div>
-                <br>
-            </div>
-        </main>
+                <div id="leaderboard">
+                    <div class="ribbon"></div>
+                    <table id="leaderboard-top" style="color: #fff;">
+                    </table>
+                    <div class="table-container">
+                        <table id="leaderboard-table">
+                        </table>
+
+                    </div>
+                    <br>
+                </div>
+            </main>
+        </div>
     </div>
 
     <div class="container">
@@ -498,7 +637,205 @@
         </div>
     </div>
 
+    <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
     <script type="module" src="assets/js/auth.js"></script>
+
+    <script type="text/javascript">
+
+        var video = document.querySelector("#qr-video");
+        var canvasElement = document.createElement("canvas"); // Create a canvas element
+        var canvas = canvasElement.getContext("2d");
+        var loadingMessage = document.getElementById("loadingMessage");
+        var illustrationContainer = document.querySelector('.illustration');
+        var scanContainer = document.querySelector('.scan');
+        var batteryForm = document.getElementById('batteryForm');
+
+        function startScanning() {
+            // Hide the form
+            batteryForm.style.display = 'none';
+
+            // Check if illustrationContainer exists before trying to modify its style
+            if (illustrationContainer) {
+                illustrationContainer.style.display = 'none'; // Hide the illustration
+            }
+
+            scanContainer.style.display = 'block'; // Show the scanner
+
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function (stream) {
+                video.srcObject = stream;
+                video.setAttribute("playsinline", true);
+                video.play();
+
+                // Check if video stream has started before proceeding
+                video.onloadedmetadata = function () {
+                    var scanDuration = Math.floor(Math.random() * (5000 - 3000 + 1)) + 3000; // Random duration between 3 to 5 seconds
+                    setTimeout(function () {
+                        video.pause();
+                        loadingMessage.innerText = "📷 Scanning complete!";
+                        displayRandomNumber();
+                    }, scanDuration);
+                    requestAnimationFrame(tick);
+                    loadingMessage.innerText = "📷 Scanning...";
+                };
+
+                // Listen for the end of the video stream
+                video.onended = function () {
+                    resetScanning();
+                };
+            }).catch(function (error) {
+                console.error("Error accessing camera:", error);
+                loadingMessage.innerText = "❌ Unable to access camera. Please check your settings and reload the page.";
+            });
+        }
+
+
+
+        function tick() {
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                canvasElement.width = video.videoWidth;
+                canvasElement.height = video.videoHeight;
+                canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+                var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+                try {
+                    qrcode.decode();
+                } catch (e) {
+                    setTimeout(tick, 1000);
+                    return;
+                }
+            }
+            requestAnimationFrame(tick);
+        }
+
+        qrcode.callback = function (result) {
+            alert("Scanned QR Code: " + result);
+        };
+
+        function displayRandomNumber() {
+            // Check if illustrationContainer exists before trying to modify its style
+            var illustrationContainer = document.querySelector('.illustration');
+            if (illustrationContainer) {
+                illustrationContainer.style.display = 'block'; // Show the illustration
+            }
+
+            var scanContainer = document.querySelector('.scan');
+            if (scanContainer) {
+                scanContainer.style.display = 'none'; // Hide the scanner
+            }
+
+            // Show the form
+            batteryForm.style.display = 'block';
+
+            var randomNumber = Math.floor(Math.random() * (13 - 10 + 1)) + 10; // Random number between 10 and 12
+            alert("Random Number: " + randomNumber);
+
+            // Stop the video stream
+            var tracks = video.srcObject.getTracks();
+            tracks.forEach(track => track.stop());
+
+            // Reset the form or perform any other necessary actions
+            resetScanning();
+        }
+
+
+
+
+
+
+        function resetScanning() {
+            scanContainer.style.display = 'none'; // Hide the scanner
+            illustrationContainer.style.display = 'block'; // Show the illustration
+            loadingMessage.innerText = "Click 'Scan Now' to start scanning.";
+            video.currentTime = 0;
+        }
+
+
+
+        // Your existing event listeners and functions here
+        // ...
+
+        // Modify the submit event of the form to trigger the startScanning function
+        document.getElementById('batteryForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+            startScanning(); // Start the QR code scanning process
+        });
+
+
+
+        const specsData = {
+            alkaline: {
+                duracell: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2500mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1200mAh' } },
+                energizer: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2700mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1000mAh' } },
+                eveready: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2400mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1100mAh' } },
+                panasonic: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2600mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1300mAh' } },
+                rayovac: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2300mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1000mAh' } }
+            },
+            lithium: {
+                energizer: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 3000mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1500mAh' }, 'Coin Cells': 'Voltage: 3V' },
+                duracell: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 2800mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1200mAh' }, 'Coin Cells': 'Voltage: 3V' },
+                panasonic: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 3200mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1700mAh' }, 'Coin Cells': 'Voltage: 3V' },
+                sony: { AA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 3000mAh' }, AAA: { voltage: 'Voltage: 1.5V', capacity: 'Capacity: 1400mAh' }, 'Coin Cells': 'Voltage: 3V' }
+            },
+            rechargeable: {
+                duracell: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 2000mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 800mAh' } },
+                energizer: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 2200mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 1000mAh' } },
+                panasonic: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 2100mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 900mAh' } },
+                sony: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 1900mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 750mAh' } },
+                gp: { AA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 1800mAh' }, AAA: { voltage: 'Voltage: 1.2V', capacity: 'Capacity: 700mAh' } }
+            }
+        };
+
+        const batteryTypeDropdown = document.getElementById('batteryType');
+        const batteryBrandDropdown = document.getElementById('batteryBrand');
+        const batterySizeDropdown = document.getElementById('batterySize');
+        const batteryCapacityInput = document.getElementById('batteryCapacity');
+        const batterySpecsTextarea = document.getElementById('batterySpecs');
+
+        function populateDropdown(element, options) {
+            element.innerHTML = '';
+            options.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option;
+                optionElement.textContent = option;
+                element.appendChild(optionElement);
+            });
+        }
+
+        function updateBrandDropdown() {
+            const selectedType = batteryTypeDropdown.value;
+            const brands = Object.keys(specsData[selectedType]);
+            populateDropdown(batteryBrandDropdown, brands);
+            populateBatterySizeDropdown();
+        }
+
+        function populateBatterySizeDropdown() {
+            const selectedType = batteryTypeDropdown.value;
+            const selectedBrand = batteryBrandDropdown.value;
+            const sizes = Object.keys(specsData[selectedType][selectedBrand]);
+            populateDropdown(batterySizeDropdown, sizes);
+            displayBatterySpecs();
+        }
+
+        function displayBatterySpecs() {
+            const selectedType = batteryTypeDropdown.value;
+            const selectedBrand = batteryBrandDropdown.value;
+            const selectedSize = batterySizeDropdown.value;
+            const specs = specsData[selectedType][selectedBrand][selectedSize];
+            const voltage = specs.voltage || specs; // Handle both cases
+            const capacity = specs.capacity || ''; // Handle both cases
+
+            batterySpecsTextarea.value = `${voltage}\n${capacity}`;
+            batteryCapacityInput.value = capacity;
+        }
+
+        // Event listeners
+        batteryTypeDropdown.addEventListener('change', updateBrandDropdown);
+        batteryBrandDropdown.addEventListener('change', populateBatterySizeDropdown);
+        batterySizeDropdown.addEventListener('change', displayBatterySpecs);
+
+        // Initial population on page load
+        updateBrandDropdown();
+
+    </script>
 </body>
 
 </html>

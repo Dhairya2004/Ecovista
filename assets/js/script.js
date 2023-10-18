@@ -1,4 +1,4 @@
-const words = ["Nature","Better future", "Recycling", "Sustainability"];
+const words = ["Nature", "Better future", "Recycling", "Sustainability"];
 let currentWordIndex = 0;
 let currentCharIndex = 0;
 let isDeleting = false;
@@ -29,15 +29,27 @@ function type() {
 
 type();
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Get the button and target div
   var scrollButton = document.getElementById("scrollButton");
   var targetDiv = document.getElementById("wrapper");
 
   // Add click event listener to the button
-  scrollButton.addEventListener("click", function() {
-      // Scroll to the target div
-      targetDiv.scrollIntoView({ behavior: 'smooth' });
+  scrollButton.addEventListener("click", function () {
+    // Scroll to the target div
+    targetDiv.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Get the button and target div
+  var scrollButton = document.getElementById("aboutUsButton");
+  var targetDiv = document.getElementById("scrollAboutUs");
+
+  // Add click event listener to the button
+  scrollButton.addEventListener("click", function () {
+    // Scroll to the target div
+    targetDiv.scrollIntoView({ behavior: 'smooth' });
   });
 });
 
@@ -45,16 +57,16 @@ document.addEventListener("DOMContentLoaded", function() {
 var videoContainer = document.getElementById("videoContainer");
 var video = document.getElementById("hoverVideo");
 
-videoContainer.addEventListener("mousemove", function(event) {
-    var mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
-    var mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
+videoContainer.addEventListener("mousemove", function (event) {
+  var mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
+  var mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
 
-    var transformValue = "translate(" + mouseX * 13 + "px, " + mouseY * 13 + "px)";
-    video.style.transform = transformValue;
+  var transformValue = "translate(" + mouseX * 13 + "px, " + mouseY * 13 + "px)";
+  video.style.transform = transformValue;
 });
 
-videoContainer.addEventListener("mouseout", function() {
-    video.style.transform = "translate(0, 0)";
+videoContainer.addEventListener("mouseout", function () {
+  video.style.transform = "translate(0, 0)";
 });
 
 const quotes = [

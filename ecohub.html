@@ -550,7 +550,8 @@
         .coin-container.animate {
             animation: wobblePopUp 1s ease-in-out;
         }
-        .desc-items p{
+
+        .desc-items p {
             margin: 0;
         }
     </style>
@@ -564,11 +565,11 @@
 
         <div class="nav-item">
             <div class="item"><a href="index.html">Home</a></div>
-            <div class="item active">EcoHub</div>
             <a href="insights.html">
                 <div class="item">Insights</div>
             </a>
-            <div class="item">Impact</div>
+            <div class="item active">EcoHub</div>
+            <div class="item"><a href="./Shop/impact.html">Impact</a></div>
         </div>
 
         <div class="nav-right">
@@ -596,17 +597,20 @@
         <div class="content-left">
             <div class="descriptive">
                 <div class="desc-items">
-                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/nurse-writing-appointment-details-3359817-2809306.png?f=webp" style=" height: 120px; object-fit: cover; ">
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/nurse-writing-appointment-details-3359817-2809306.png?f=webp"
+                        style=" height: 120px; object-fit: cover; ">
                     <p><b>Step 1:</b></p>
                     <p>Fill out Battery Details</p>
                 </div>
                 <div class="desc-items">
-                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/web-qr-code-scanning-8342178-6676421.png?f=webp" style=" height: 120px; object-fit: cover; ">
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/web-qr-code-scanning-8342178-6676421.png?f=webp"
+                        style=" height: 120px; object-fit: cover; ">
                     <p><b>Step 2:</b></p>
                     <p>Scan & Verify Battery</p>
                 </div>
                 <div class="desc-items">
-                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/loyalty-program-5070031-4231661.png?f=webp" style=" height: 120px; object-fit: cover; ">
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/loyalty-program-5070031-4231661.png?f=webp"
+                        style=" height: 120px; object-fit: cover; ">
                     <p><b>Step 3</b></p>
                     <p>Earn Ranking & E-coins</p>
                 </div>
@@ -614,7 +618,8 @@
             <div class="form-scan">
 
                 <form id="batteryForm" style="text-align: center;">
-                        <p style="font-family: 'Bebas Neue', sans-serif;font-size: 25px;letter-spacing: 2px;"><b>Juice up your batteries: Earn, Recycle, Dominate!</b></p>
+                    <p style="font-family: 'Bebas Neue', sans-serif;font-size: 25px;letter-spacing: 2px;"><b>Juice up
+                            your batteries: Earn, Recycle, Dominate!</b></p>
                     <label for="batteryType">Select Battery Type:</label>
                     <select id="batteryType" name="batteryType">
                         <option value="alkaline">Alkaline</option>
@@ -632,7 +637,7 @@
                     <input type="text" id="batteryCapacity" name="batteryCapacity" readonly>
 
                     <label for="batterySpecs">Battery Specifications:</label>
-                    <textarea id="batterySpecs" name="batterySpecs"  readonly></textarea>
+                    <textarea id="batterySpecs" name="batterySpecs" readonly></textarea>
 
                     <input type="submit" value="Scan Now" id="simulateclick" style="width:auto;padding: 10px 15px;
                 background-color: #00311f;

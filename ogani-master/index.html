@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>All departments</span>
+                        </div>
+                        <ul>
+                            <li><a href="#">Fresh Meat</a></li>
+                            <li><a href="#">Vegetables</a></li>
+                            <li><a href="#">Fruit & Nut Gifts</a></li>
+                            <li><a href="#">Fresh Berries</a></li>
+                            <li><a href="#">Ocean Foods</a></li>
+                            <li><a href="#">Butter & Eggs</a></li>
+                            <li><a href="#">Fastfood</a></li>
+                            <li><a href="#">Fresh Onion</a></li>
+                            <li><a href="#">Papayaya & Crisps</a></li>
+                            <li><a href="#">Oatmeal</a></li>
+                            <li><a href="#">Fresh Bananas</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="#">
+                                <div class="hero__search__categories">
+                                    All Categories
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+65 11.188.888</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Categories Section Begin -->
+    <section class="categories">
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="data:image/jpeg;base64,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">
+                            <h5><a href="#">Fresh Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="img/categories/cat-2.jpg">
+                            <h5><a href="#">Dried Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="img/categories/cat-3.jpg">
+                            <h5><a href="#">Vegetables</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="img/categories/cat-4.jpg">
+                            <h5><a href="#">drink fruits</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="img/categories/cat-5.jpg">
+                            <h5><a href="#">drink fruits</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Categories Section End -->
+
+    <!-- Featured Section Begin -->
+    <section class="featured spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Featured Product</h2>
+                    </div>
+                    <div class="featured__controls">
+                        <ul>
+                            <li class="active" data-filter="*">All</li>
+                            <li data-filter=".oranges">Oranges</li>
+                            <li data-filter=".fresh-meat">Fresh Meat</li>
+                            <li data-filter=".vegetables">Vegetables</li>
+                            <li data-filter=".fastfood">Fastfood</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row featured__filter">
+                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-3.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-4.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-7.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-8.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Featured Section End -->
+
+    <!-- Banner Begin -->
+    <div class="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img src="img/banner/banner-1.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img src="img/banner/banner-2.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner End -->
+
+    <!-- Latest Product Section Begin -->
+    <section class="latest-product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="latest-product__text">
+                        <h4>Latest Products</h4>
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-1.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-2.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-3.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-1.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-2.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-3.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="latest-product__text">
+                        <h4>Top Rated Products</h4>
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-1.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-2.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-3.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-1.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-2.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-3.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="latest-product__text">
+                        <h4>Review Products</h4>
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-1.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-2.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-3.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-1.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-2.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="img/latest-product/lp-3.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Latest Product Section End -->
+
+    <!-- Blog Section Begin -->
+    <section class="from-blog spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title from-blog__title">
+                        <h2>From The Blog</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="img/blog/blog-1.jpg" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="#">Cooking tips make cooking simple</a></h5>
+                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="img/blog/blog-2.jpg" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
+                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="img/blog/blog-3.jpg" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="#">Visit the clean farm in the US</a></h5>
+                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        </div>
+                        <ul>
+                            <li>Address: 60-49 Road 11378 New York</li>
+                            <li>Phone: +65 11.188.888</li>
+                            <li>Email: hello@colorlib.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                        <h6>Useful Links</h6>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">About Our Shop</a></li>
+                            <li><a href="#">Secure Shopping</a></li>
+                            <li><a href="#">Delivery infomation</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Our Sitemap</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Who We Are</a></li>
+                            <li><a href="#">Our Services</a></li>
+                            <li><a href="#">Projects</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Innovation</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer__widget">
+                        <h6>Join Our Newsletter Now</h6>
+                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <form action="#">
+                            <input type="text" placeholder="Enter your mail">
+                            <button type="submit" class="site-btn">Subscribe</button>
+                        </form>
+                        <div class="footer__widget__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+                        <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+
+
+</body>
+
+</html>
